@@ -13,25 +13,16 @@ mr = MapReduce.MapReduce()
 def mapper(record):
     # key: document identifier
     # value: document contents
-    key = record[1]
-    value = record;
-    mr.emit_intermediate(key, value)
-
+    key = record[0]
+    value = record[1]
+    mr.emit_intermediate(value[:-10], key)
 
 def reducer(key, list_of_values):
     # key: word
     # value: list of occurrence counts
-    orderrow = []
-    for row in list_of_values:
-    	if (row[0] == "order"): 
-		orderrow = row;
-	elif (row[0] == "line_item"):
-		finalrow = [];
-		finalrow.extend(orderrow);
-		finalrow.extend(row);
-		mr.emit(finalrow);
-
-
+    mr.emit(key)
+      	
+	
 
 # Do not modify below this line
 # =============================

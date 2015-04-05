@@ -13,25 +13,25 @@ mr = MapReduce.MapReduce()
 def mapper(record):
     # key: document identifier
     # value: document contents
-    key = record[1]
-    value = record;
+    key = record[0]
+    value = record[1]
     mr.emit_intermediate(key, value)
+    mr.emit_intermediate(value, key)
 
-
-def reducer(key, list_of_values):
+def reducer(key, list_of_friends):
     # key: word
     # value: list of occurrence counts
-    orderrow = []
-    for row in list_of_values:
-    	if (row[0] == "order"): 
-		orderrow = row;
-	elif (row[0] == "line_item"):
-		finalrow = [];
-		finalrow.extend(orderrow);
-		finalrow.extend(row);
-		mr.emit(finalrow);
-
-
+    friends_set = set();
+    for person in list_of_friends:
+	# detect duplicates and remove them
+        if (person in friends_set):
+		friends_set.remove(person);
+	else:
+		friends_set.add(person);
+    for person in friends_set:
+	    mr.emit((key, person));
+ 	
+	
 
 # Do not modify below this line
 # =============================
