@@ -1,0 +1,1 @@
+c:\Users\naray_000\Desktop\psftp.exe hadoop@ec2-54-200-161-63.us-west-2.compute.amazonaws.com  -i "d:\onedrive\Work Stuff\narg.ppk"
