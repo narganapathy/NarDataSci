@@ -1,0 +1,6 @@
+Alternatively, you can achieve the same thing by adding the following permanent setting in your mapred-site.xml file, this file lies in HADOOP_HOME/conf/ :
+<property>
+    <name>mapred.child.java.opts</name>
+    <value>-Xmx4096m</value>
+</property>
+
